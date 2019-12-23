@@ -18,7 +18,7 @@ BASE_URL = 'https://www.pornhub.com'
 @click.option('--search')
 @click.option('--count', default=5)
 
-def search(search):
+def search(search, count):
     req = requests.get(SEARCH_URL + search).content
     soup = bs(req, 'html.parser')
 
@@ -38,6 +38,9 @@ def search(search):
     for item in video_list:
         print(str(num) + ' - ' + item.get('title'))
         num += 1
+
+        if num > count:
+            break
 
 if __name__ == '__main__':
     search()
