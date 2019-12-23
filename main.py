@@ -21,11 +21,10 @@ BASE_URL = 'https://www.pornhub.com'
 def search(search, count):
     req = requests.get(SEARCH_URL + search).content
     soup = bs(req, 'html.parser')
-
-    list_items = soup.find_all('a', class_='linkVideoThumb js-linkVideoThumb img')
+    a_class = 'linkVideoThumb js-linkVideoThumb img'
 
     video_list = []
-    for item in list_items:
+    for item in soup.find_all('a', class_=a_class):
         video_list.append(
             {
                 'title': item.find('img')['alt'],
@@ -34,13 +33,28 @@ def search(search, count):
             }
         )
 
-    num = 1
+    num = 0
+    disp_videos = []
     for item in video_list:
         print(str(num) + ' - ' + item.get('title'))
+        disp_videos.append(item)
         num += 1
-
         if num > count:
             break
+
+    play(disp_videos)
+
+
+def play(videos):
+    while True:
+        selection = click.prompt()
+        if not selection:
+            print('!')
+        elif selection == 'exit':
+            break
+        else:
+            os.command(f'mpv {url}')
+
 
 if __name__ == '__main__':
     search()
