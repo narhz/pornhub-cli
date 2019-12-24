@@ -2,7 +2,7 @@
 
 import click
 from pprint import pprint
-import funcs
+import f
 
 import os
 
@@ -13,7 +13,7 @@ import os
 @click.option('--count', default=5)
 
 def run(search, count):
-    keywords = funcs.search(search, count)
+    keywords = f.search(search, count)
     urls = []
     titles = []
 
@@ -21,7 +21,7 @@ def run(search, count):
         titles.append(str(item.get('index')) + ' - ' + item.get('title'))
         urls.append(item.get('video-url'))
 
-    funcs.disp(titles)
+    f.disp(titles)
         
     while True:
         sel = click.prompt('> ')
@@ -32,7 +32,7 @@ def run(search, count):
             try:
                 sel = int(sel)
                 os.system('mpv --really-quiet ' + urls[sel])
-                funcs.disp(titles)
+                f.disp(titles)
             except:
                 print('Not a valid selection or mpv is having an issue.')
                 
