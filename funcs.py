@@ -9,6 +9,7 @@ BASE_URL = 'https://www.pornhub.com'
 
 
 def search(keywords, amount):
+    keywords = keywords.replace(' ', '+')
     req = requests.get(SEARCH_URL + keywords).content
     soup = bs(req, 'html.parser')
     a_class = 'linkVideoThumb js-linkVideoThumb img'
