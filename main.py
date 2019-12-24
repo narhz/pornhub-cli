@@ -12,13 +12,16 @@ import os
 @click.option('--search')
 @click.option('--count', default=5)
 
-def temp(search, count):
+def run(search, count):
     keywords = funcs.search(search, count)
-
     urls = []
+    titles = []
+
     for item in keywords:
-        print(str(item.get('index')) + ' - ' + item.get('title'))
+        titles.append(str(item.get('index')) + ' - ' + item.get('title'))
         urls.append(item.get('video-url'))
+
+    funcs.disp(titles)
         
     while True:
         sel = click.prompt('> ')
@@ -29,8 +32,9 @@ def temp(search, count):
             try:
                 sel = int(sel)
                 os.system('mpv --really-quiet ' + urls[sel])
+                funcs.disp(titles)
             except:
                 print('Not a valid selection or mpv is having an issue.')
                 
     
-temp()
+run()

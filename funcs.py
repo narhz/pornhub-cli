@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests
 import os
+import click
 
 
 
@@ -35,3 +36,9 @@ def search(keywords, amount):
 def play(videos, li_index):
     video_url = videos[int(li_index)].get('video-url')
     os.system('mpv ' + video_url)
+
+
+def disp(titles):
+    click.clear()
+    for title in titles:
+        print(title)
