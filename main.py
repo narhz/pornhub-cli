@@ -37,4 +37,5 @@ def run(search, count):
                 print('Not a valid selection or mpv is having an issue.')
                 
     
-run()
+if __name__ == '__main__':
+    run()
