@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup as bs
 import requests
-
-from pprint import pprint
+import os
 
 
 
@@ -21,7 +20,8 @@ def search(keywords, amount):
             {
                 'title': item.find('img')['alt'],
                 'video-url': BASE_URL + item['href'],
-                'thumb-url': item.find('img')['src']
+                'thumb-url': item.find('img')['src'],
+                'index': num
             }
         )
         num += 1
@@ -31,8 +31,6 @@ def search(keywords, amount):
     return video_list
 
 
-def play(videos, video_id):
-    
-
-
-pprint(search('car', 5))
+def play(videos, li_index):
+    video_url = videos[int(li_index)].get('video-url')
+    os.system('mpv ' + video_url)
