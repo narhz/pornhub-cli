@@ -25,9 +25,12 @@ def temp(search, count):
 
         if sel == 'exit':
             break
-        elif not sel:
-            print('!')
         else:
-            os.system('mpv ' + urls[int(sel)])
+            try:
+                sel = int(sel)
+                os.system('mpv ' + urls[sel])
+            except:
+                print('Not a valid selection or mpv is having an issue.')
+                
     
 temp()
