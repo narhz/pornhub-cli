@@ -28,7 +28,7 @@ def temp(search, count):
         else:
             try:
                 sel = int(sel)
-                os.system('mpv ' + urls[sel])
+                os.system('mpv --really-quiet ' + urls[sel])
             except:
                 print('Not a valid selection or mpv is having an issue.')
                 
